@@ -19,8 +19,8 @@ package com.google.samples.apps.iosched.ui.map
 import androidx.annotation.DrawableRes
 import androidx.annotation.RawRes
 import androidx.annotation.StringRes
+import com.google.samples.apps.iosched.BuildConfig
 import com.google.samples.apps.iosched.R
-import com.google.samples.apps.iosched.shared.BuildConfig
 import org.threeten.bp.Instant
 import org.threeten.bp.ZonedDateTime
 

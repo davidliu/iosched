@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2018 Google LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <!-- 2019 colors -->
+    <color name="deep_sky_blue">#1a73e8</color> <!-- colorPrimary in Light mode-->
+    <color name="warm_blue">#574ddd</color> <!-- colorPrimaryDark in Light mode-->
+    <color name="carolina_blue">#8ab4f8</color> <!-- colorPrimary in Dark mode-->
+    <color name="cornflower_blue">#669DF6</color> <!-- colorPrimaryDark in Dark mode-->
+
+    <color name="teal">#069f86</color>
+    <color name="bright_light_blue">#27e5fd</color>
+    <color name="sun_yellow">#fcd230</color>
+    <color name="bright_orange">#ff6c00</color>
+
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
+    <color name="transparent">#0fff</color>
+</resources>

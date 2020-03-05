@@ -40,6 +40,25 @@ android {
 
         buildConfigField "float", "MAP_CAMERA_FOCUS_ZOOM", "${map_camera_focus_zoom}"
 
+        buildConfigField "String", "CONFERENCE_TIMEZONE", "\"${conference_timezone}\""
+        buildConfigField "String", "CONFERENCE_DAY1_START", "\"${conference_day1_start}\""
+        buildConfigField "String", "CONFERENCE_DAY1_END", "\"${conference_day1_end}\""
+        buildConfigField "String", "CONFERENCE_DAY2_START", "\"${conference_day2_start}\""
+        buildConfigField "String", "CONFERENCE_DAY2_END", "\"${conference_day2_end}\""
+        buildConfigField "String", "CONFERENCE_DAY3_START", "\"${conference_day3_start}\""
+        buildConfigField "String", "CONFERENCE_DAY3_END", "\"${conference_day3_end}\""
+
+        buildConfigField "String", "CONFERENCE_DAY1_AFTERHOURS_START", "\"${conference_day1_afterhours_start}\""
+        buildConfigField "String", "CONFERENCE_DAY2_CONCERT_START", "\"${conference_day2_concert_start}\""
+
+        buildConfigField "String",
+                "BOOTSTRAP_CONF_DATA_FILENAME",
+                "\"${bootstrap_conference_data_filename}\""
+
+        buildConfigField "String",
+                "CONFERENCE_WIFI_OFFERING_START",
+                "\"${conference_wifi_offering_start}\""
+
         resValue "dimen", "map_camera_bearing", "${map_default_camera_bearing}"
         resValue "dimen", "map_camera_target_lat", "${map_default_camera_target_lat}"
         resValue "dimen", "map_camera_target_lng", "${map_default_camera_target_lng}"
@@ -62,7 +81,8 @@ android {
             resValue "string",
                     "google_maps_key",
                     "AIzaSyD5jqwKMm1SeoYsW25vxCXfTlhDBeZ4H5c"
-
+            buildConfigField "String", "REGISTRATION_ENDPOINT_URL", "\"https://events-d07ac.appspot.com/_ah/api/registration/v1/register\""
+            buildConfigField "String", "CONFERENCE_DATA_URL", "\"https://firebasestorage.googleapis.com/v0/b/io2019-festivus-prod/o/sessions.json?alt=media&token=89140adf-e228-45a5-9ae3-8ed01547166a\""
             buildConfigField "String", "MAP_TILE_URL_BASE", "\"https://storage.googleapis.com/io2019-festivus-prod/images/maptiles\""
         }
         debug {
@@ -71,6 +91,8 @@ android {
             resValue "string",
                     "google_maps_key",
                     "AIzaSyAhJx57ikQH9rYc8IT8W3d2As5cGHMBvuo"
+            buildConfigField "String", "REGISTRATION_ENDPOINT_URL", "\"https://events-dev-62d2e.appspot.com/_ah/api/registration/v1/register\""
+            buildConfigField "String", "CONFERENCE_DATA_URL", "\"https://firebasestorage.googleapis.com/v0/b/io2019-festivus/o/sessions.json?alt=media&token=019af2ec-9fd1-408e-9b86-891e4f66e674\""
 
             buildConfigField "String", "MAP_TILE_URL_BASE", "\"https://storage.googleapis.com/io2019-festivus/images/maptiles\""
         }
@@ -123,8 +145,6 @@ android {
 }
 
 dependencies {
-    implementation project(':shared')
-    implementation project(':ar')
     testImplementation project(':test-shared')
     testImplementation project(':androidTest-shared')
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -156,6 +176,56 @@ dependencies {
     testImplementation "androidx.room:room-ktx:$rootProject.roomVersion"
     testImplementation "androidx.room:room-runtime:$rootProject.roomVersion"
 
+    // From AR
+    implementation "androidx.appcompat:appcompat:$rootProject.appcompatVersion"
+    implementation "com.google.ar:core:$rootProject.arcoreVersion"
+    implementation "com.google.android.gms:play-services-vision:$rootProject.googlePlayServicesVisionVersion"
+    // From model
+    api "org.threeten:threetenbp:$rootProject.threetenbpVersion:no-tzdb"
+    implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
+
+    // From shared
+    // Architecture Components
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata:$rootProject.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$rootProject.lifecycleVersion"
+    implementation "androidx.room:room-ktx:$rootProject.roomVersion"
+    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
+    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+
+    // Maps
+    api("com.google.maps.android:android-maps-utils:$rootProject.googleMapUtilsVersion") {
+        exclude group: "com.google.android.gms"
+    }
+    api "com.google.android.gms:play-services-maps:$rootProject.googlePlayServicesMapsVersion"
+
+    // Utils
+    api "com.jakewharton.timber:timber:$rootProject.timberVersion"
+    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+    implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
+
+    // OkHttp
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
+
+    // Dagger
+    implementation "com.google.dagger:dagger-android:$rootProject.dagger"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger"
+
+    // Firebase
+    api "com.google.firebase:firebase-auth:$rootProject.firebaseAuthVersion"
+    api "com.google.firebase:firebase-config:$rootProject.firebaseConfigVersion"
+    api "com.google.firebase:firebase-core:$rootProject.firebaseCoreVersion"
+    api "com.google.firebase:firebase-firestore:$rootProject.firebaseFirestoreVersion"
+    api "com.google.firebase:firebase-functions:$rootProject.firebaseFunctionsVersion"
+    api "com.google.firebase:firebase-messaging:$rootProject.firebaseMessagingVersion"
+    // Has to be replaced to avoid compile / runtime conflicts between okhttp and firestore
+    api "com.squareup.okio:okio:$rootProject.okioVersion"
     // Dagger
     implementation "com.google.dagger:dagger-android:$rootProject.dagger"
     implementation "com.google.dagger:dagger-android-support:$rootProject.dagger"
