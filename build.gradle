@@ -130,7 +130,6 @@ allprojects {
 
         flatDir {
             dirs "libs"
-            dirs project(":ar").file("libs")
         }
     }
 }

@@ -19,7 +19,6 @@ apply plugin: 'kotlin'
 
 dependencies {
 
-    implementation project(":model")
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
 
