@@ -145,8 +145,6 @@ android {
 }
 
 dependencies {
-    testImplementation project(':test-shared')
-    testImplementation project(':androidTest-shared')
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     implementation "androidx.core:core-ktx:$rootProject.coreVersion"
